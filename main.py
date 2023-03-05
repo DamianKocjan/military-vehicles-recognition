@@ -8,7 +8,7 @@ from tensorflow.keras import layers
 # Load the dataset
 dataset_path = "./datasets"
 vehicle_classes = []  # Initialize an empty list for the classes
-img_size = (128, 128)
+img_size = (400, 400)
 
 # Get the subdirectories in the dataset directory as class names
 for class_name in os.listdir(dataset_path):
@@ -27,15 +27,15 @@ def create_model():
     """Create the model"""
 
     model = keras.Sequential([
-        layers.Conv2D(64, 3, activation="relu",
+        layers.Conv2D(32, 3, activation="relu",
                       input_shape=(img_size[0], img_size[1], 1)),
+        layers.MaxPooling2D(),
+        layers.Conv2D(64, 3, activation="relu"),
         layers.MaxPooling2D(),
         layers.Conv2D(128, 3, activation="relu"),
         layers.MaxPooling2D(),
-        layers.Conv2D(256, 3, activation="relu"),
-        layers.MaxPooling2D(),
         layers.Flatten(),
-        layers.Dense(256, activation="relu"),
+        layers.Dense(128, activation="relu"),
         layers.Dense(len(vehicle_classes))
     ])
 

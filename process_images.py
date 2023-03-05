@@ -14,6 +14,11 @@ def random_blur(img: Image.Image):
     return img.filter(ImageFilter.GaussianBlur(radius=radius))
 
 
+def rotate(img: Image.Image):
+    angle = random.randint(-30, 30)
+    return img.rotate(angle, expand=True)
+
+
 def process_image(path: str):
     img = Image.open(path)
     # Resize the image
